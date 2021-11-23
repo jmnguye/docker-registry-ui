@@ -12,3 +12,5 @@ The simplest way is with `simple.yml` docker-compose file.
 ```sh
 docker-compose -f simple.yml up -d
 ```
+
+forked from https://github.com/Joxit/docker-registry-ui/tree/main/examples/ui-as-standalone
