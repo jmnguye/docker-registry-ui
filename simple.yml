@@ -1,0 +1,25 @@
+version: '2.0'
+services:
+  registry:
+    image: registry:2.7
+    ports:
+      - 443:443
+    volumes:
+      - /var/lib/registry:/var/lib/registry
+      - ./registry-config/simple.yml:/etc/docker/registry/config.yml
+      - /etc/certs:/certs
+    environment:
+      - REGISTRY_HTTP_ADDR=0.0.0.0:443
+      - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
+      - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+
+  ui:
+    image: joxit/docker-registry-ui:latest
+    ports:
+      - 80:80
+    environment:
+      - REGISTRY_TITLE=My Private Docker Registry
+      - REGISTRY_URL=https://docker-registry.lan:443
+      - SINGLE_REGISTRY=true
+    depends_on:
+      - registry
