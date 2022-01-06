@@ -11,7 +11,8 @@ services:
     environment:
       - REGISTRY_HTTP_ADDR=0.0.0.0:443
       - REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt
-      - REGISTRY_HTTP_TLS_KEY=/certs/domain.key
+      - REGISTRY_HTTP_TLS_KEY=/certs/domain.key- 
+    restart: "unless-stopped"
 
   ui:
     image: joxit/docker-registry-ui:latest
@@ -23,3 +24,4 @@ services:
       - SINGLE_REGISTRY=true
     depends_on:
       - registry
+    restart: "unless-stopped"
